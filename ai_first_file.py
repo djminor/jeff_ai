@@ -173,7 +173,7 @@ if __name__=='__main__':
             wakeUp()
             
         elif "weather" in statement:
-            api_key="963b7a18804290b2804c6d0669ecc901"
+            api_key="ENTER API KEY HERE"
             base_url="https://api.openweathermap.org/data/2.5/weather?"
             speak("What city would you like to know the weather for?")
             city_name=takeCommand()
