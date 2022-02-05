@@ -125,18 +125,18 @@ if __name__=='__main__':
             webbrowser.open_new_tab("https://gmail.com")
             time.sleep(5)
             wakeUp()
-            
+           
         elif "time" in statement:
             strTime=datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"the time is {strTime}")
             wakeUp()
-            
+           
         elif "news" in statement:
             news = webbrowser.open_new_tab("https://www.nytimes.com/")
             speak("Here are some headlines from the New York Times")
             time.sleep(6)
             wakeUp()
-            
+           
         elif "search" in statement:
             statement = statement.replace("search", "")
             webbrowser.open_new_tab(statement)
@@ -147,8 +147,8 @@ if __name__=='__main__':
             print("I can answer computational and geographical questions. What would you like to know?")
             speak("I can answer computational and geographical questions. What would you like to know?")
             question=takeCommand()
-            app_id="P6Y5PX-GKJAK9X6QJ"
-            client = wolframalpha.Client("P6Y5PX-GKJAK9X6QJ")
+            app_id="ENTER API KEY"
+            client = wolframalpha.Client("ENTER API KEY")
             res = client.query(question)
             answer = next(res.results).text
             speak(answer)
@@ -187,17 +187,17 @@ if __name__=='__main__':
                 z = x["weather"]
                 weather_description = z[0]["description"]
                 speak("Temperature is " +
-                      str(round(convertToFarenheit(current_temperature), 2)) +
-                    "\n degrees Farenheit, humidity is " +
-                    str(current_humidity) +
-                    "\n and the forecast calls for " +
-                    str(weather_description))
+                str(round(convertToFarenheit(current_temperature), 2)) +
+                "\n degrees Farenheit, humidity is " +
+                str(current_humidity) +
+                "\n and the forecast calls for " +
+                str(weather_description))
                 print("Temperature is " +
-                    str(round(convertToFarenheit(current_temperature), 2)) +
-                    "\n degrees Farenheit, humidity is " +
-                    str(current_humidity) +
-                    "\n and the forecast calls for " +
-                    str(weather_description))
+                str(round(convertToFarenheit(current_temperature), 2)) +
+                "\n degrees Farenheit, humidity is " +
+                str(current_humidity) +
+                "\n and the forecast calls for " +
+                str(weather_description))
             wakeUp()
             
         elif "fact" in statement:
