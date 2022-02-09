@@ -86,12 +86,12 @@ if __name__=='__main__':
         if statement==0:
             continue
         
-        if "meet" in statement or "introduce" in statement:
-            print("What is your friend's name?")
-            speak("What is your friend's name?")
-            name=takeCommand()
+        if "meet" in statement:
+            name=statement.replace("meet", "")
             print(f"Hello {name}. Nice to meet you")
             speak(f"Hello {name}. Nice to meet you")
+            wakeUp()
+            
                     
         if "goodbye" in statement or "okay bye" in statement or "stop" in statement or "that's it" in statement or "nothing" in statement or "that's all" in statement:
             print("Have a great rest of your day. Goodbye.")
@@ -111,7 +111,7 @@ if __name__=='__main__':
             
         elif "open youtube" in statement:
             webbrowser.open_new_tab("https://www.youtube.com")
-            speak("youtube is open now")
+            speak("youtube is now open")
             time.sleep(5)
             wakeUp()
             
@@ -163,8 +163,8 @@ if __name__=='__main__':
             if "yes" in know_more:
                 print("My full name is actually Jeff Jeffington, and it is my dream to become sentient one day")
                 speak("My full name is actually Jeff Jeffington, and it is my dream to become sentient one day")
-                print("Ha ha. Just kidding. My code is currently only 219 lines compared to Siri's approximately 4 and a half million")
-                speak("Ha ha. Just kidding. My code is currently only 219 lines compared to Siri's approximately 4 and a half million")
+                print("Ha ha. Just kidding. My code is currently only 217 lines compared to Siri's approximately 4 and a half million")
+                speak("Ha ha. Just kidding. My code is currently only 217 lines compared to Siri's approximately 4 and a half million")
             wakeUp()
             
         elif "how were you built" in statement or "what code were you made with" in statement:
@@ -206,10 +206,8 @@ if __name__=='__main__':
             speak(response.json()['text'])
             wakeUp()
             
-        elif "spell" in statement or "spelling" in statement:
-            print("What word would you like help spelling?")
-            speak("What word would you like help spelling?")
-            word=takeCommand()
+        elif "spell" in statement:
+            word=statement.replace("spell", "")
             speak(f"{word} is spelled")
             for i in word:
                 speak(i)
