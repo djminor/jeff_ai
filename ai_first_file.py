@@ -12,6 +12,9 @@ import subprocess
 import wolframalpha
 import json
 import requests
+import cloudmersive_nlp_api_client
+from cloudmersive_nlp_api_client.rest import ApiException
+from pprint import pprint
 
 engine=pyttsx3.init('sapi5')
 voices=engine.getProperty('voices')
@@ -76,6 +79,7 @@ def convertToFarenheit(someTemp):
 if __name__=='__main__':
     
     wake=wakeUp()
+    note_counter = 0
     
     while wake == True:
         wishMe()
@@ -163,8 +167,8 @@ if __name__=='__main__':
             if "yes" in know_more:
                 print("My full name is actually Jeff Jeffington, and it is my dream to become sentient one day")
                 speak("My full name is actually Jeff Jeffington, and it is my dream to become sentient one day")
-                print("Ha ha. Just kidding. My code is currently only 217 lines compared to Siri's approximately 4 and a half million")
-                speak("Ha ha. Just kidding. My code is currently only 217 lines compared to Siri's approximately 4 and a half million")
+                print("Ha ha. Just kidding. My code is currently only 244 lines compared to Siri's approximately 4 and a half million")
+                speak("Ha ha. Just kidding. My code is currently only 244 lines compared to Siri's approximately 4 and a half million")
             wakeUp()
             
         elif "how were you built" in statement or "what code were you made with" in statement:
@@ -214,6 +218,29 @@ if __name__=='__main__':
                 print(i)
             speak(word)
             print(word)
+            wakeUp()
+        elif "transcribe" in statement:
+            note_counter = note_counter + 1
+            note_content = statement.replace("transcribe", "")
+            try:
+                with open("note.txt", "x") as f:
+                    f.write(f"{note_content}")
+            except: 
+                with open(f"note{note_counter}.txt", "x") as f:
+                    f.write(f"{note_content}")
+            wakeUp()
+        elif "translate" in statement:
+            phraseToTranslate = statement.replace("translate", "")
+            configuration = cloudmersive_nlp_api_client.Configuration()
+            configuration.api_key['Apikey'] = '9fee242a-9569-4ac9-ac6d-1a049257d875'
+            api_instance = cloudmersive_nlp_api_client.LanguageTranslationApi(cloudmersive_nlp_api_client.ApiClient(configuration))
+            input = cloudmersive_nlp_api_client.LanguageTranslationRequest(phraseToTranslate)
+            try: 
+                api_response = api_instance.language_translation_translate_eng_to_rus(input)
+                pprint(api_response.translated_text_result)
+                speak("Here you go!")
+            except ApiException as e:
+                print("Exception when calling LanguageTranslationApi->language_translation_translate_eng_to_rus: %s\n" % e)
             wakeUp()
             
     
